@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 20
-  productGUID: 00000000000000000000000000000000
+  productGUID: b89d08610015af24f8833d8491b39a51
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -733,7 +733,7 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   cloudProjectId: 9369b516-df45-461a-869b-e20b9214a62c
   framebufferDepthMemorylessMode: 0
-  projectName: EffectsExamples
+  projectName: Rocket Project
   organizationId: faiyaz48
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
