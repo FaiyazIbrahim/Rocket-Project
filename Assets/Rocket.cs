@@ -9,6 +9,13 @@ public class Rocket : MonoBehaviour
     float thrust;
     [SerializeField]
     float turn_thrust;
+
+
+    //rocket rotation
+    float smooth = 2.0f;
+    float tiltAngle = 20.0f;
+    [SerializeField]float speed = 0.1f;
+
     void Start()
     {
         rocket = GetComponent<Rigidbody2D>();
@@ -16,14 +23,26 @@ public class Rocket : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.Space))
-        {
 
+        // Smoothly tilts a transform towards a target rotation.
+        float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
+        float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
+
+        // Rotate the cube by converting the angles into a quaternion.
+        Quaternion target = Quaternion.Euler(-tiltAroundX, 0, -tiltAroundZ);
+
+        // Dampen towards the target rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            
         }
 
         if (Input.GetKey(KeyCode.A)) //left
         {
             AddForceAt_left(thrust, turn_thrust);
+            
         } 
         
         
