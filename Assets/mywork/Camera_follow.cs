@@ -13,7 +13,12 @@ public class Camera_follow : MonoBehaviour
         transform.position = new Vector3(player.position.x + offset.x, player.position.y + offset.y, offset.z); // Camera follows the player with specified offset position
 
 
-        if(Camera.main.fieldOfView <= 130)
+        //if()
+        //{
+
+        //}
+
+        if(Camera.main.fieldOfView <= 100)
         {
             Camera.main.fieldOfView = Camera.main.fieldOfView + (10f * Time.deltaTime);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour
@@ -36,7 +37,7 @@ public class Rocket : MonoBehaviour
         //rocket altitude
         Rocket_altitude = Rocket_altitude + transform.position.y * Time.deltaTime;
         test_altitude.text = Rocket_altitude.ToString();
-        Debug.Log("<color=green>altitude: </color>" + Rocket_altitude);
+        //Debug.Log("<color=green>altitude: </color>" + Rocket_altitude);
 
         Debug.Log("left" + left_engine);
         Debug.Log("right" + right_engine);
@@ -56,34 +57,26 @@ public class Rocket : MonoBehaviour
 
         //}
 
-        if (Input.GetKey(KeyCode.A)) //left
+        if (left_engine) //left
         {
-            left_engine = true;
 
             AddForceAt_left(thrust, turn_thrust);
 
         }
-        else
-        {
-            left_engine = false;
-        }
 
 
-        if (Input.GetKey(KeyCode.D)) //right
+        if (right_engine) //right
         {
-            right_engine = true;
             AddForceAt_right(thrust, turn_thrust);
         }
-        else
-        {
-            right_engine = false;
-        }
 
 
 
 
 
-        #region engine test lights
+
+
+        #region engine test lights and keyboard
 
         //engine testing**********************************
 
@@ -103,6 +96,24 @@ public class Rocket : MonoBehaviour
         {
             right_test_engine.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
+        //buttons..................................
+
+        if(Input.GetKey(KeyCode.A))
+        {
+            left_engine = true;
+        }else
+        {
+            left_engine = false;
+        }
+
+        if(Input.GetKey(KeyCode.D))
+        {
+            right_engine = true;
+        }
+        else
+        {
+            right_engine = false;
+        }
 
         #endregion
 
@@ -111,32 +122,50 @@ public class Rocket : MonoBehaviour
 
     public void AddForceAt_right(float force, float angle)
     {
-        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
-        float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
-        Vector3 right_force = new Vector3(ycomponent, xcomponent, 0);
-        rocket.AddForce(right_force);
+        if(right_engine)
+        {
+            float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
+            float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
+            Vector3 right_force = new Vector3(ycomponent, xcomponent, 0);
+            rocket.AddForce(right_force);
+        }    
+        
     }
 
     public void AddForceAt_left(float force, float angle)
     {
-        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
-        float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
-        Vector3 left_force = new Vector3(-ycomponent, xcomponent, 0);
-        rocket.AddForce(left_force);
+        if(left_engine)
+        {
+            float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
+            float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
+            Vector3 left_force = new Vector3(-ycomponent, xcomponent, 0);
+            rocket.AddForce(left_force);
+        }
+        
     }
 
 
 
     public void leftButton()
     {
+        Debug.Log("left");
         left_engine = true;
         
+    }
+    public void release_left()
+    {
+        Debug.Log("right");
+        left_engine = false;
     }
 
 
     public void rightButton()
     {
         right_engine = true;
+    }
+    public void release_right()
+    {
+        right_engine = false;
     }
 
 
