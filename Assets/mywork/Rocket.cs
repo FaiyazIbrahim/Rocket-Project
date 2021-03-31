@@ -12,6 +12,8 @@ public class Rocket : MonoBehaviour
     [SerializeField]
     float turn_thrust;
     public static float Rocket_altitude = 0;
+    Transform ground;
+    float distance;
 
 
     //rocket rotation
@@ -28,6 +30,7 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         rocket = GetComponent<Rigidbody2D>();
+        ground = GameObject.FindGameObjectWithTag("ground").GetComponent<Transform>();
 
     }
 
@@ -70,6 +73,12 @@ public class Rocket : MonoBehaviour
             AddForceAt_right(thrust, turn_thrust);
         }
 
+
+        if(Vector2.Distance(transform.position , ground.position) > 0)
+        {
+            Debug.Log(Vector2.Distance(transform.position , ground.position) > 0);
+        }
+       
 
 
 
